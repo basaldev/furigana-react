@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'furigana-react'
+import { Furigana } from 'furigana-react'
 
 export default class App extends Component {
   render () {
     return (
       <div>
-        <ExampleComponent furigana="わたし:だいす">
+        <Furigana furigana="わたし:だいす">
           私はクッキーが大好きです。
-        </ExampleComponent>
+        </Furigana>
       </div>
     )
   }

@@ -35,7 +35,7 @@ function getSpacing(furigana: string){
 }
 
 
-export default class Furigana extends React.Component<Props> {
+export class Furigana extends React.Component<Props> {
   state: defaultState;
   props: Props;
   constructor(props:Props){
@@ -88,7 +88,6 @@ export default class Furigana extends React.Component<Props> {
     const lastKanji = matchedKanji[matchedKanji.length - 1].kanji;
     cut.push(this.props.children.split(lastKanji)[1]);
     return cut;
-    //concat remaining string
   }
   buildRender(cutChildren: string[], matchedKanji: MatchedKanji){
 
@@ -118,14 +117,10 @@ export default class Furigana extends React.Component<Props> {
         }
     })}</>)
   }
-  componentWillMount(){
-
-  }
   render() {
     return (
       <span className={styles.wrapper}>
         {this.buildFuri()}<br></br>
-        {this.props.children}
       </span>
     )
   }
