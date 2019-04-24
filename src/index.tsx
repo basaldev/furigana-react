@@ -26,17 +26,13 @@ export type ParsedKanji = {
 }
 
 function getSpacing(furigana: string){
-  const marginMulti = nihongo.parseHiragana(furigana).length;
+  const marginMulti = furigana ? nihongo.parseHiragana(furigana).length: 0;
   const spacing = (marginMulti*5)/2;
   return {
     kanji: `0 ${spacing}px`,
-    furigana: `-${spacing/marginMulti}px`
+    furigana: 0 //TODO testing of spacing `-${spacing/marginMulti-1}px`
   }
 }
-function clearKanji(text:string){
-
-}
-
 
 export class Furigana extends React.Component<Props> {
   state: defaultState;
@@ -55,7 +51,7 @@ export class Furigana extends React.Component<Props> {
   buildFuri(){
     const parsed = this.parseChild();
     const matched = this.matchKanji(parsed);
-    const cutChildren = this.cutChildren(matched);
+    const cutChildren = this.cutChildren();
     const renderString = this.buildRender(cutChildren, matched);
     return renderString;
   }
@@ -122,9 +118,7 @@ export class Furigana extends React.Component<Props> {
   }
   render() {
     return (
-      <span className={styles.wrapper}>
-        {this.buildFuri()}<br></br>
-      </span>
+      <span className={styles.wrapper}>{this.buildFuri()}</span>
     )
   }
 }

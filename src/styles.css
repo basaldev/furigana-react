@@ -2,14 +2,14 @@
 
 .wrapper {
   display: inline-block;
-  margin: 2em auto;
-  font-size: 2em;
+  font-size: inherit;
+  margin-top: 1em;
   position: relative;
   line-height: 1.6;
 }
 .furigana {
   position: absolute;
-  top: -40%;
+  top: -42%;
   font-size: 35%;
   width: 100%;
   text-align: center;

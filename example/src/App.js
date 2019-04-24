@@ -7,8 +7,11 @@ export default class App extends Component {
     return (
       <div>
         {/* hatsuon maybe better prob name */}
-        <Furigana furigana="わたし:だいす:わたし:だいす:わたし:だいす:わたし:だいす">
-          私はクッキーが大好きです。私はクッキーが大好きです。私はクッキーが大好きです。
+        <Furigana furigana="わたし:だいす">
+          私はクッキーが大好きです。
+        </Furigana>
+        <Furigana furigana="わたし:だいす">
+          酵素とは、生体で起こる化学反応に対して触媒として機能する分子である。酵素によって触媒される反応を“酵素的”反応という。
         </Furigana>
       </div>
     )
