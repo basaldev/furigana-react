@@ -10,8 +10,13 @@ export default class App extends Component {
         <Furigana furigana="わたし:だいす">
           私はクッキーが大好きです。
         </Furigana>
-        <Furigana furigana="わたし:だいす" opacity={0.4}>
-          酵素とは、生体で起こる化学反応に対して触媒として機能する分子である。酵素によって触媒される反応を“酵素的”反応という。
+        <Furigana
+          id="example2"
+          furigana="こうそ:せいたい:お:かがくはんのう:たい:しょくばい:きのう:ぶんし:こうそ:しょくばい:はんのう:こうそてきはんのう"
+          opacity={0.4}
+          spacingUnit={5}
+          >
+          酵素とは、生体で起こる化学反応に対して触媒として機能する分子である。酵素によって触媒される反応を酵素的反応という。
         </Furigana>
       </div>
     )

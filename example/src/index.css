@@ -19,3 +19,10 @@ html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquot
   display:block;
   max-width: 500px;
 }
+
+#example2 {
+  line-height: 2;
+}
+#example2 .kanji-soshi .furigana-tag {
+  color: red;
+}

@@ -11,6 +11,8 @@ export type Props = {
   furigana: string;
   opacity: number;
   children: any;
+  id?: string;
+  spacingUnit?: number;
 }
 export type defaultState = {
   foundKanji: Array<any>,
@@ -26,9 +28,11 @@ export type ParsedKanji = {
   foundKanji: any, furigana: string[]
 }
 
-function getSpacing(furigana: string){
-  const marginMulti = furigana ? nihongo.parseHiragana(furigana).length: 0;
-  const spacing = (marginMulti*5)/2;
+function getSpacing(kanji: string, furigana: string, spacingUnit: number = 6){
+  const kanjiLength = furigana ? nihongo.parseKanji(kanji).length: 0;
+  const furiganaLength = furigana ? nihongo.parseHiragana(furigana).length: 0;
+  const lengthDif = Math.abs(furiganaLength - kanjiLength);
+  const spacing = (lengthDif*spacingUnit)/2;
   return {
     kanji: `0 ${spacing}px`,
     furigana: `0px` //TODO testing of spacing `-${spacing/marginMulti-1}px`
@@ -93,7 +97,7 @@ export class Furigana extends React.Component<Props> {
       if(typeof item === 'undefined'){
         return <span key={text+i} >{text}</span>
       }
-      const spacing = getSpacing(item.furigana);
+      const spacing = getSpacing(item.kanji, item.furigana, this.props.spacingUnit);
       if(text === ""){
           return (
           <Kanji
@@ -121,7 +125,7 @@ export class Furigana extends React.Component<Props> {
   }
   render() {
     return (
-      <span className={styles.wrapper}>{this.buildFuri()}</span>
+      <span id={this.props.id} className={styles.wrapper}>{this.buildFuri()}</span>
     )
   }
 }
