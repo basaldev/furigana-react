@@ -9,6 +9,7 @@ import { Kanji } from './kanji';
 
 export type Props = {
   furigana: string;
+  opacity: number;
   children: any;
 }
 export type defaultState = {
@@ -30,7 +31,7 @@ function getSpacing(furigana: string){
   const spacing = (marginMulti*5)/2;
   return {
     kanji: `0 ${spacing}px`,
-    furigana: 0 //TODO testing of spacing `-${spacing/marginMulti-1}px`
+    furigana: `0px` //TODO testing of spacing `-${spacing/marginMulti-1}px`
   }
 }
 
@@ -96,6 +97,7 @@ export class Furigana extends React.Component<Props> {
       if(text === ""){
           return (
           <Kanji
+            opacity={this.props.opacity}
             key={item.kanji+text+i}
             spacing={spacing}
             kanji={item.kanji}
@@ -108,6 +110,7 @@ export class Furigana extends React.Component<Props> {
           >
             <span>{text}</span>
             <Kanji
+              opacity={this.props.opacity}
               spacing={spacing}
               kanji={item.kanji}
               furigana={item.furigana}
