@@ -5,6 +5,7 @@
 import * as React from 'react'
 import nihongo from 'nihongo';
 import styles from './styles.css'
+import { Kanji } from './kanji';
 
 export type Props = {
   furigana: string;
@@ -23,6 +24,16 @@ export type MatchedKanji = Array<{
 export type ParsedKanji = {
   foundKanji: any, furigana: string[]
 }
+
+function getSpacing(furigana: string){
+  const marginMulti = nihongo.parseHiragana(furigana).length;
+  const spacing = (marginMulti*5)/2;
+  return {
+    kanji: `0 ${spacing}px`,
+    furigana: `-${spacing/marginMulti}px`
+  }
+}
+
 
 export default class Furigana extends React.Component<Props> {
   state: defaultState;
@@ -69,21 +80,42 @@ export default class Furigana extends React.Component<Props> {
   }
   cutChildren(matchedKanji: MatchedKanji){
     const text = this.props.children;
-    return matchedKanji.map((item) => {
+    const cut = matchedKanji.map((item) => {
       const beforeChar = text.split(item.kanji)[0];
       const length = nihongo.parseKanji(item.kanji).length;
       return beforeChar.substr(length);
     })
+    const lastKanji = matchedKanji[matchedKanji.length - 1].kanji;
+    cut.push(this.props.children.split(lastKanji)[1]);
+    return cut;
+    //concat remaining string
   }
   buildRender(cutChildren: string[], matchedKanji: MatchedKanji){
-    return (<>{matchedKanji.map((item, i) => {
-      console.log(cutChildren[i]);
-      const marginMulti = nihongo.parseHiragana(item.furigana).length;
-      const spacing = (marginMulti*5)/2;
-      return (<><span className={styles.kanjiWrapper} style={{padding:`0 ${spacing}px`}}>
-        <sup style={{left: `-${spacing/marginMulti}px`}}className={styles.furigana}>{item.furigana}</sup>
-        <span className={styles.kanjiWrapper}>{item.kanji}</span>
-      </span></>)
+
+    return (<>{cutChildren.map((text, i) => {
+      const item = matchedKanji[i];
+      if(typeof item === 'undefined'){
+        return <span>{text}</span>
+      }
+      const spacing = getSpacing(item.furigana);
+      if(text === ""){
+          return (
+          <Kanji
+            spacing={spacing}
+            kanji={item.kanji}
+            furigana={item.furigana}
+            styles={styles}
+          />)
+        } else {
+          return (<>
+            <span>{text}</span>
+            <Kanji
+              spacing={spacing}
+              kanji={item.kanji}
+              furigana={item.furigana}
+              styles={styles}
+          /></>);
+        }
     })}</>)
   }
   componentWillMount(){
