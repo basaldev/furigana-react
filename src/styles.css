@@ -5,11 +5,12 @@
   margin: 2em auto;
   font-size: 2em;
   position: relative;
+  line-height: 1.6;
 }
 .furigana {
   position: absolute;
-  top: -60%;
-  font-size: 40%;
+  top: -40%;
+  font-size: 35%;
   width: 100%;
   text-align: center;
 }

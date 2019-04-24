@@ -6,8 +6,9 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Furigana furigana="わたし:だいす">
-          私はクッキーが大好きです。
+        {/* hatsuon maybe better prob name */}
+        <Furigana furigana="わたし:だいす:わたし:だいす:わたし:だいす:わたし:だいす">
+          私はクッキーが大好きです。私はクッキーが大好きです。私はクッキーが大好きです。
         </Furigana>
       </div>
     )

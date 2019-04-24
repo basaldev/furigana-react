@@ -33,6 +33,9 @@ function getSpacing(furigana: string){
     furigana: `-${spacing/marginMulti}px`
   }
 }
+function clearKanji(text:string){
+
+}
 
 
 export class Furigana extends React.Component<Props> {
@@ -78,42 +81,42 @@ export class Furigana extends React.Component<Props> {
       return { kanji, furigana: furigana[i] }
     })
   }
-  cutChildren(matchedKanji: MatchedKanji){
-    const text = this.props.children;
-    const cut = matchedKanji.map((item) => {
-      const beforeChar = text.split(item.kanji)[0];
-      const length = nihongo.parseKanji(item.kanji).length;
-      return beforeChar.substr(length);
+  cutChildren(){
+    const kanjiList = nihongo.parseKanjiCompounds(this.props.children);
+    let cleanText = this.props.children;
+    kanjiList.map((kanji:string) => {
+      return cleanText = cleanText.replace(kanji, '#|#');
     })
-    const lastKanji = matchedKanji[matchedKanji.length - 1].kanji;
-    cut.push(this.props.children.split(lastKanji)[1]);
-    return cut;
+    return cleanText.split('#|#');
   }
   buildRender(cutChildren: string[], matchedKanji: MatchedKanji){
 
     return (<>{cutChildren.map((text, i) => {
       const item = matchedKanji[i];
       if(typeof item === 'undefined'){
-        return <span>{text}</span>
+        return <span key={text+i} >{text}</span>
       }
       const spacing = getSpacing(item.furigana);
       if(text === ""){
           return (
           <Kanji
+            key={item.kanji+text+i}
             spacing={spacing}
             kanji={item.kanji}
             furigana={item.furigana}
             styles={styles}
           />)
         } else {
-          return (<>
+          return (<span
+            key={item.kanji+text+i}
+          >
             <span>{text}</span>
             <Kanji
               spacing={spacing}
               kanji={item.kanji}
               furigana={item.furigana}
               styles={styles}
-          /></>);
+          /></span>);
         }
     })}</>)
   }
