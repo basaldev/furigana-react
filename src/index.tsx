@@ -77,11 +77,13 @@ export default class Furigana extends React.Component<Props> {
   }
   buildRender(cutChildren: string[], matchedKanji: MatchedKanji){
     return (<>{matchedKanji.map((item, i) => {
-      debugger
-      return (<><span className="kanji">
-        <sup>{item.furigana}</sup>
-        <span>{item.kanji}</span>
-      </span><span>{cutChildren[i]}</span></>)
+      console.log(cutChildren[i]);
+      const marginMulti = nihongo.parseHiragana(item.furigana).length;
+      const spacing = (marginMulti*5)/2;
+      return (<><span className={styles.kanjiWrapper} style={{padding:`0 ${spacing}px`}}>
+        <sup style={{left: `-${spacing/marginMulti}px`}}className={styles.furigana}>{item.furigana}</sup>
+        <span className={styles.kanjiWrapper}>{item.kanji}</span>
+      </span></>)
     })}</>)
   }
   componentWillMount(){
@@ -89,8 +91,9 @@ export default class Furigana extends React.Component<Props> {
   }
   render() {
     return (
-      <span className={styles.test}>
-        {this.buildFuri()}
+      <span className={styles.wrapper}>
+        {this.buildFuri()}<br></br>
+        {this.props.children}
       </span>
     )
   }
