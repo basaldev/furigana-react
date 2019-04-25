@@ -1,6 +1,7 @@
 # furigana-react | ふりがなレアクト
 
 > an easy element to wrap text that contains kanji
+> 漢字を含むテキストを折り返すための簡単な要素
 
 [![NPM](https://img.shields.io/npm/v/furigana-react.svg)](https://www.npmjs.com/package/furigana-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
