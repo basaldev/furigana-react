@@ -15,6 +15,7 @@ npm install --save furigana-react
 ## Usage
 
 wrap the text you want to add furigana too in this components and add in the furigana for each kanji compound.
+ふりがなを追加するテキストもこのコンポーネントで囲み、各漢字化合物のふりがなを追加します。
 ```
 大好 = だいす  🙆
 大 = だい     🙅
